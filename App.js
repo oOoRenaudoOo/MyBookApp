@@ -8,6 +8,7 @@ import FirstScreen from './AllApps/First';
 import AppNews from './AllApps/AppNews';
 import Insta from './AllApps/Insta'
 import Tuto from './AllApps/TutoFlatList'; 
+import TutoFireList from './AllApps/TutoFireList'
 import DetailScreen from './AllApps/AppNews/detail'
 import Ecommerce from './AllApps/Ecommerce';
 import Private from './AllApps/Ecommerce/Private';
@@ -55,6 +56,8 @@ export default function App() {
 
           <Stack.Screen name="AppInsta" component={Insta} />
           <Stack.Screen name="AppTuto" component={Tuto} />
+          
+          <Stack.Screen name="AppTutoFireList" component={TutoFireList} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

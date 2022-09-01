@@ -28,7 +28,7 @@ const Tuto = () => {
         console.log(getNombres.length);
 
         const tempNombre = [...getNombres, getNombres.length+1];
-        console.log("plus",tempNombre);
+        console.log(tempNombre);
 
         setNombres(tempNombre);
 

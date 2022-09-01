@@ -23,6 +23,12 @@ export const dataApp = [
         nomApp: "AppEcommerce"  
     },
 
+    {
+        id: 5,
+        titre: "Fire List",
+        nomApp: "AppTutoFireList"  
+    },
+
     // {
     //     id: 4,
     //     titre: "Toc Tok",
