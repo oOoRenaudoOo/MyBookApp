@@ -2,22 +2,40 @@ import { View, Text, FlatList, Button } from 'react-native'
 import React from 'react'
 
 import { useState } from 'react'
-import { set } from 'immer/dist/internal';
+
+import firestore from '@react-native-firebase/firestore';
+
+
+
+
 
 
 
 const Tuto = () => {
 
   const [getNombres, setNombres] = useState([0,1]);
-    
-   const Ajouter  = () => {
 
-        const tempNombre = [...getNombres, getNombres.length];
-        console.log(tempNombre);
+  const readStagiaire = async () => {
+    const user = await firestore().collection('stagiaires').doc('F86a11zo4r7OPypHFVf9').get();
+    console.log('user', user)
+  }
+
+
+    
+  const Ajouter = async () => {
+        await readStagiaire();
+
+        console.log(getNombres.length);
+
+        const tempNombre = [...getNombres, getNombres.length+1];
+        console.log("plus",tempNombre);
 
         setNombres(tempNombre);
 
     }
+
+
+
 
     
   return (

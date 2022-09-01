@@ -13,11 +13,13 @@ const RenderEmptyComponent = ({waiting}) => {
         : <Text>PAS DE NEWS !</Text>}
     </View>
   )
-}
-
-
+};
 
 export default RenderEmptyComponent
+
+
+
+
 
 const styles = StyleSheet.create({
     content: {

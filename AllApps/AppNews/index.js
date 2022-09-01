@@ -19,16 +19,17 @@ const NewScreen = () => {
     const [waiting, setWaiting] = useState(true);
 
     // gestion de la navigation
-    const [getPage, setPage] = useState(1);
+    const [getPage, setPage] = useState(0);
 
     
     // chargement loadmore, gestion de la pagination
     const nextPage = async () => {
       setPage(getPage+1);
+      loadNews()
 
-      const articles = await apiNews(getPage);
-      setNews(articles);
-      console.log("page: ", getPage);
+      // const articles = await apiNews(getPage);
+      // setNews(articles);
+      // console.log("page: ", getPage);
     }
 
     
@@ -41,7 +42,7 @@ const NewScreen = () => {
         setTimeout(() => {
         setNews([...getNews, ...articles]);
         setWaiting(false)
-      }, 5000);
+      }, 2000);
         
 
     }
