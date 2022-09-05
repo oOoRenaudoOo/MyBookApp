@@ -11,7 +11,9 @@ const Item = ({ item }) => (
         <Text style={styles.nom}>{item.nom}</Text>
         <Text style={styles.prenom}>{item.prenom}</Text>
     </View>
+    <View style={styles.image_container}>
     <Image style={styles.image} source={{uri: item.image}} />
+    </View>
   </View>
 );
 
@@ -34,9 +36,10 @@ const TutoFireList = () => {
             let dataTemp = [];
 
             snapShot.forEach(document=>{
+              // console.log("doc", document)
                 dataTemp.push({ id: document.id, ...document.data() });
                 setData(dataTemp);
-                console.log("document : ",dataTemp);
+                // console.log("document : ",dataTemp);
             })
         });
     },[]);
@@ -83,12 +86,21 @@ const styles = StyleSheet.create({
   },
   prenom: {
     fontSize: 15,
-    // fontWeight: 'bold',
+    fontWeight: 'bold',
   },
   image: {
     height: 60,
     width: 60,
     borderRadius:50
+  },
+  image_container: {
+    width:70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderRadius: 50,
+    elevation: 15
   }
 
 });

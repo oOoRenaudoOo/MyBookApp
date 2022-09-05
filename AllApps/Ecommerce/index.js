@@ -1,24 +1,49 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Connexion from './Public/Connexion';
-import Private from './Private';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FirebaseContext } from '../../firebaseContext';
+
+
+import Home from './screen/Home';
+import Setting from './screen/Setting';
+import { useEffect } from 'react';
+
+
+const Tab = createBottomTabNavigator();
 
 
 
 
-const Index = () => {
-    //recupere la variable login qui est dans le state
-    const {login} = useSelector(state=>state);
 
+const App = () => {
   
+  const firebase = useContext(FirebaseContext);
+  console.log("Firebase: ", firebase)
+  
+  const initCategories = async () => {
+    const categories = await firebase.getCategories();
+    
+    if(!categories.empty){
+      console.log("pas vide");
+      categories.forEach(categoryData => {
+        console.log("first", categoryData.data())
+      })
+    }
+    console.log("categories: ", categories);
+  }
 
+  useEffect(() => {
+    initCategories();
+
+  },[]);
+    
+  
   return (
-    <View>
-      <Text>Ecommerce</Text>
-      { !login ? <Connexion/> : <Private/> }
-    </View>
-  )
-}
+      <Tab.Navigator screenOptions={ {headerShown: false} }>
+        <Tab.Screen name="Accueil" component={Home} />
+        <Tab.Screen name="Mon compte" component={Setting} />
+      </Tab.Navigator>
+  );
+};
 
-export default Index
+
+export default App;

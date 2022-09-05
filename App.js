@@ -51,7 +51,7 @@ export default function App() {
           <Stack.Screen name="DetailScreen" component={DetailScreen} />
           
             {/* Ecommerce App screen  */}
-          <Stack.Screen name="AppEcommerce" component={Ecommerce} />
+          <Stack.Screen name="AppEcommerce" component={Ecommerce} options={{headerShown:false}}/>
           <Stack.Screen name="Private" component={Private} />
 
           <Stack.Screen name="AppInsta" component={Insta} />
