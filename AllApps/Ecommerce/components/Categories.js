@@ -2,12 +2,16 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 import React from 'react'
 
 
-const data = [
-    {id: 1, nom: "cat 1"},
-    {id: 2, nom: "cat 2"},
-    {id: 3, nom: "cat 3"},
-    {id: 4, nom: "cat 4"},
-];
+// import { FirebaseContext } from '../../firebaseContext';
+import { useSelector } from 'react-redux';
+
+
+// const data = [
+//     {id: 1, nom: "cat 1"},
+//     {id: 2, nom: "cat 2"},
+//     {id: 3, nom: "cat 3"},
+//     {id: 4, nom: "cat 4"},
+// ];
 
 const RenderCategorie = ({categorie}) => {
     return (
@@ -15,16 +19,37 @@ const RenderCategorie = ({categorie}) => {
             <Text>{categorie.nom}</Text>
         </TouchableOpacity>
     )
-}
+};
+
+
+// const initCategories = async () => {
+//     const categories = await firebase.getCategories();
+    
+//     if(!categories.empty){
+//       console.log("pas vide");
+//       categories.forEach(categoryData => {
+//         console.log("lecture: ", categoryData.data())
+//       })
+//     }
+//     console.log("categories: ", categories);
+//   }
+
 
 
 
 const Categories = () => {
+    // Declaration du reducer dataCategorie
+
+    const {dataCategorie} = useSelector (state=>state)
+    console.log("reducer datacategorie:", dataCategorie);
+
+
   return (
     <View style={styles.content}>
         <Text style={styles.title}>Categories</Text>
         <FlatList
-            data={data}
+            data={dataCategorie}
+            // data={data}
             renderItem={({item}) => <RenderCategorie categorie={item} />}
             keyExtractor={item => item.id}
             horizontal={true}
@@ -33,6 +58,8 @@ const Categories = () => {
     </View>
   )
 }
+
+
 
 export default Categories
 
@@ -44,9 +71,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 25,
         fontWeight: '600'
-    },
-    itemR: {
-
     },
     touchCategorie: {
         backgroundColor: "yellow",

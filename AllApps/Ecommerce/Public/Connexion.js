@@ -19,8 +19,6 @@ const Connexion = () => {
   //dispatcher
   const dispatch = useDispatch();
 
-
-
   const pressConnexion = () => {
     dispatch(editLogin(true));
     console.log("connexion", login);

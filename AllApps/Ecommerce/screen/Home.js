@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-import Categories from '../components/Categories'
+import Categories from '../components/Categories';
+import Articles from '../components/Articles';
+
+
 
 const Home = () => {
   return (
     <View style={styles.content}>
       <Categories />
+      <Articles />
     </View>
   )
 }
