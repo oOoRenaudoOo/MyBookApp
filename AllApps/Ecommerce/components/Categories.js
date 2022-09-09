@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 const RenderCategorie = ({categorie}) => {
     return (
         <TouchableOpacity style={styles.touchCategorie}>
-            <Text>{categorie.nom}</Text>
+            <Text style={styles.textCategorie}>{categorie.nom}</Text>
         </TouchableOpacity>
     )
 };
@@ -69,23 +69,27 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     title: {
-        fontSize: 25,
-        fontWeight: '600'
+        fontSize: 20,
+        fontWeight: '700'
     },
     touchCategorie: {
         backgroundColor: "yellow",
         margin: 10,
-        padding: 10,
-        width: 160,
+        marginTop: 5,
+        padding: 5,
+        // width: 120,
         borderRadius: 20,
-        height: 45,
+        height: 35,
         borderWidth: 1,
         borderColor: 'black',
-        elevation: 10
+        elevation: 10,
+        justifyContent: 'center'
+        // alignItems: 'center'
     },
     textCategorie: {
-        fontSize: 18,
-        color: "#fff",
-        fontWeight: "500"
+        fontSize: 14,
+        // color: "#fff",
+        fontWeight: "500",
+        marginHorizontal: 10
     } 
 })

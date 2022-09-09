@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 
 import { FirebaseContext } from '../../../firebaseContext';
+import ArticleDetail from '../components/ArticleDetail';
+
+
 
 const NoArticle = () => {
     return (<Text>Pas d'article</Text>)
@@ -19,8 +22,11 @@ const Details = ({route}) => {
         setLoad(true);
         const rqArticle = await firebase.getArticleById(id);
 
-        setArticle(rqArticle.data());
-        console.log("rqArticle : ", rqArticle.data());
+        setTimeout(()=> {
+            setArticle({id: id, ...rqArticle.data()});
+            setLoad(false);
+            console.log("rqArticle : ", rqArticle.data());
+        }, 500)
     }
 
 
@@ -38,9 +44,7 @@ const Details = ({route}) => {
                     <ActivityIndicator />
                 : (article == null) ?  
                     <NoArticle />
-                    :   <Text style={styles.title}>
-                            PAGE Detail
-                        </Text>
+                    : <ArticleDetail article={article} />
             }
         </View>
     )

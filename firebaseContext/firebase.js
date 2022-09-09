@@ -13,7 +13,7 @@ class Firebase {
 
     getArticles = () => this.firestore.collection("articles").get();
 
-    getArticleById = (id) => this.firestore.collection(articles).doc(id).get();
+    getArticleById = (id) => this.firestore.collection("articles").doc(id).get();
 }
 
 export default Firebase

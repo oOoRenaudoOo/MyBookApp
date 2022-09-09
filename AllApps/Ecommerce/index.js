@@ -3,10 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FirebaseContext } from '../../firebaseContext';
 
-
+// screens for navigation
 import Home from './screen/Home';
 import Setting from './screen/Setting';
 import Details from './screen/Details';
+import Panier from './screen/Panier';
+
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -21,8 +23,8 @@ const Stack = createNativeStackNavigator();
 
 const Accueil = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Accueil"  component={Home}/>
+    <Stack.Navigator  screenOptions={ {headerShown: false} }>
+      <Stack.Screen name="Home"  component={Home}/>
       <Stack.Screen name="Details"  component={Details}/>
     </Stack.Navigator>
   )
@@ -41,22 +43,23 @@ const App = () => {
     // lecture des categories dans la base de donnees Firebase
     const categories = await firebase.getCategories();
    
-    if(!categories.empty){
-    //  console.log("categories.empty", categories.empty);
+    if (!categories.empty) {
+      //  console.log("categories.empty", categories.empty);
       categories.forEach(categoryData => {
 
       //  console.log("id categoryData.id", categoryData.id);
-        //console.log("categoryData.nom", categoryData.data().nom);
+      // console.log("categoryData.nom", categoryData.data().nom);
         
-        // creation de la payload pour mettre a jour le state initial du reducer 
-        const tempCategorie = {
-          id: categoryData.id,
-          nom: categoryData.data().nom};
+      // creation de la payload pour mettre a jour le state initial du reducer 
+      // const tempCategorie = {
+      //   id: categoryData.id,
+      //   nom: categoryData.data().nom};
+      //   xx: categoryData.xx
 
-        // version destructuree
-        // const tempCategorie = { 
-        //   id: categoryData.id,
-        //   ...categoryData.data()};
+      // version destructuree
+      const tempCategorie = { 
+        id: categoryData.id,
+        ...categoryData.data()};
 
         // mise a jour du reducer
         console.log("temp: ", tempCategorie);
@@ -76,21 +79,22 @@ const App = () => {
     const articles = await firebase.getArticles();
     console.log("articles ", articles.empty);
     
-    if(!articles.empty){
+    if (!articles.empty) {
       console.log("articles pas vide", articles.empty);
       articles.forEach(articleData => {
        // console.log("id", articleData.id);
        // console.log("nom", articleData.data().nom);
         
         // creation de la payload pour mettre a jour le state initial du reducer 
-        const tempArticle = { 
-          id: articleData.id,
-          nom: articleData.data().nom};
+        // const tempArticle = { 
+        //   id: articleData.id,
+        //   nom: articleData.data().nom};
+        //   xx: articleData.xx
 
         // version destructuree
-        // const tempCategorie = { 
-        //   id: categoryData.id,
-        //   ...categoryData.data()};
+        const tempArticle = { 
+          id: articleData.id,
+          ...articleData.data()};
 
         // mise a jour du reducer
         console.log("temp: ", tempArticle);
@@ -115,6 +119,7 @@ const App = () => {
   return (
       <Tab.Navigator screenOptions={ {headerShown: false} }>
         <Tab.Screen name="Accueil" component={Accueil} />
+        <Tab.Screen name="Panier" component={Panier} />
         <Tab.Screen name="Mon compte" component={Setting} />
       </Tab.Navigator>
   );

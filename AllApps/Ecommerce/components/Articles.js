@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
 
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { trackForMutations } from '@reduxjs/toolkit/dist/immutableStateInvariantMiddleware';
 
 
 // const data = [
@@ -17,11 +18,13 @@ const RenderArticle = ({article}) => {
     const navigation = useNavigation();
 
     const onPressArticle =() => {
-        navigation.navigate("Details", {id:article.id});
+        navigation.navigate("Details", {id: article.id});
     }
     return (
         <TouchableOpacity style={styles.touchArticle} onPress={onPressArticle}>
-            <Text>{article.nom}</Text>
+            <Text style={styles.titre_article}>{article.nom.length >= 15 ? article.nom.substring(0,10) + '...' : article.nom}</Text>
+            <Image source={{uri: article.image}} style={styles.image}/>
+            <Text style={styles.prix}>{article.prix} €</Text>
         </TouchableOpacity>
     )
 };
@@ -49,50 +52,64 @@ const Articles = () => {
 
 
   return (
-    <View style={styles.content}>
+    <View>
         <Text style={styles.title}>Articles</Text>
-        <FlatList
-            data={dataArticle}
-            // data={data}
-            renderItem={({item}) => <RenderArticle article={item} />}
-            keyExtractor={item => item.id}
-            horizontal={false}
-            numColumns={2}
-            showsHorizontalScrollIndicator={false}
-        />
+        <View style={styles.container}>
+            <FlatList
+                data={dataArticle}
+                // data={data}
+                renderItem={({item}) => <RenderArticle article={item} />}
+                keyExtractor={item => item.id}
+                horizontal={false}
+                numColumns={2}
+                showsHorizontalScrollIndicator={false}
+            />
+        </View>
     </View>
   )
 }
 
-
-
 export default Articles
 
+
+
+
+
 const styles = StyleSheet.create({
-    content: {
-        flex: 1,
-        width: "100%"
+    container: {
+        height:300,
+        marginTop: 5,
+        marginHorizontal: 5,
     },
     title: {
-        fontSize: 25,
-        fontWeight: '600'
-    },
-    itemR: {
-
+        fontSize: 20,
+        fontWeight: '700',
     },
     touchArticle: {
-        backgroundColor: "yellow",
-        margin: 10,
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "black",
+        marginRight: 5,
+        marginBottom: 5,
         padding: 10,
-        width: 135,
+        width: 142,
         borderRadius: 15,
-        height: 200,
+        height: 190,
         borderWidth: 1,
         borderColor: 'black',
     },
-    textArticle: {
-        fontSize: 18,
-        color: "#fff",
-        fontWeight: "500"
+    titre_article: {
+        fontSize: 14,
+        color: "yellow",
+        fontWeight: "700",
+        marginBottom: 5
+    },
+    image: {
+        width: 125,
+        height: 120
+    },
+    prix: {
+        color: "white",
+        fontsize: 18
     } 
 })
